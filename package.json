@@ -1,0 +1,39 @@
+{
+  "name": "secret-project",
+  "version": "1.0.0",
+  "description": "Because Im Batman!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec node --experimental-specifier-resolution=node src/index.js | pino-pretty",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --exec node --experimental-specifier-resolution=node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeterKrajci/secret_project.git"
+  },
+  "author": "Batman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PeterKrajci/secret_project/issues"
+  },
+  "homepage": "https://github.com/PeterKrajci/secret_project#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express-validator": "^6.13.0",
+    "pino-http": "^5.8.0"
+  }
+}
