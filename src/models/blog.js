@@ -42,3 +42,5 @@ const blogSchema = mongoose.Schema({
         contentType: String
     }
 })
+
+module.exports = mongoose.model('Blogs', blogSchema);
