@@ -27,11 +27,18 @@ const blogSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    //comments
+    comments:[
+        { body: String, 
+        date: Date }
+    ],
     date: {
         type: Date,
         default: Date.now
     },
     likes: Number,
-    //image
+    img:
+    {
+        data: Buffer,
+        contentType: String
+    }
 })
