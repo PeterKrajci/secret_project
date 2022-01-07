@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Because Im Batman!",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon --exec node --experimental-specifier-resolution=node src/index.js | pino-pretty",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "node --experimental-specifier-resolution=node src/index"
+
   },
   "repository": {
     "type": "git",

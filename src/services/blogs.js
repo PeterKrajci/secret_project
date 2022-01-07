@@ -1,1 +1,3 @@
-// add code here 
+// add code here
+
+export default {}

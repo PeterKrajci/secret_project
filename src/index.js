@@ -1,22 +1,23 @@
-const express = require("express");
+import "dotenv/config";
+import express from "express";
+import routes from "./routes";
 const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
-const logger = require("pino-http")();
-const bodyParser = require("body-parser");
-
-const path = require("path");
-require("dotenv").config({ path: path.resolve("src", "./.env") });
+import mongoose from "mongoose";
+import cors from "cors";
+import pino from "pino-http";
+import bodyParser from "body-parser";
 
 app.use(cors());
-app.use(logger);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(pino());
 
 //Routes
 app.get("/", (req, res) => {
   res.send("Chellou");
 });
+
+app.use('/blogs', routes.blogs)
 
 app.all("*", (_, res) => {
   res.sendStatus(404);
@@ -31,4 +32,3 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
 // Listen to server
 app.listen(3000);
 
-////node --exec node --experimental-specifier-resolution=node
