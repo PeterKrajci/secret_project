@@ -1,10 +1,17 @@
-import express from "express"
+import express from "express";
 import {param, validationResult} from "express-validator"
 
 import services from "../services"
 
-const router = express.Router()
 
+const router = express.Router();
 
+router.get('/', (req, res) => {
+    res.send('We are on blogs');
+});
 
-export default router
+router.post('/', (req, res) => {
+    console.log(req.body);
+});
+
+export default router;

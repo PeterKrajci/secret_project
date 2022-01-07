@@ -1,2 +1,3 @@
 // add code here
-// skusam branch
+
+export default {}
