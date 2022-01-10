@@ -6,6 +6,7 @@ import cors from "cors";
 import pino from "pino-http";
 import bodyParser from "body-parser";
 import services from "./services";
+import { param } from "express-validator";
 
 const app = express();
 
@@ -19,7 +20,9 @@ app.get("/", (req, res) => {
   res.send("Chellou");
 });
 
-app.delete("/:id", services.blogs.deleteBlogById);
+app.get("/blogs", services.blogs.getAllBlogs);
+
+app.delete("/:id", param("id").isLength(24), services.blogs.deleteBlogById);
 
 app.use("/blogs", routes.blogs);
 
