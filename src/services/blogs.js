@@ -1,14 +1,28 @@
-// add code here
+import { validationResult } from "express-validator";
+import { blogModel } from "../models/blog";
+
 const getBlogById = async (req, res) => {
   try {
-    const idOfBlog = req.params.id;
+    const validationResults = validationResult(req);
+    if (validationResults.isEmpty()) {
+      const idOfBlog = req.params.id;
+      const blog = await blogModel.findById(idOfBlog).exec();
 
-    const blog = await Adventure.findById(idOfBlog).exec();
+      if (blog == null) {
+        const blogNotFoundMsg = `Blog with id: ${idOfBlog} was not found!`;
 
-    res.status(200).send(blog);
+        req.log.info(blogNotFoundMsg);
+        res.status(404).send(blogNotFoundMsg);
+      } else {
+        res.status(200).send(blog);
+      }
+    } else {
+      req.log.info(validationResults);
+      res.status(422).send("ValidationError");
+    }
   } catch (error) {
-    console.log(error);
-    res.send("Something went wrong!");
+    req.log.info(error);
+    res.sendStatus(500);
   }
 };
 
