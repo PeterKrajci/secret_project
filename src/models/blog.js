@@ -10,37 +10,33 @@ client.connect(err => {
 
 //mongodb+srv://User1:<password>@test.fnhqc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
-
-
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
 
 const blogSchema = mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    author: {
-        type: String,
-        required: true
-    },
-    text: {
-        type: String,
-        required: true
-    },
-    comments:[
-        { body: String, 
-        date: Date }
-    ],
-    date: {
-        type: Date,
-        default: Date.now
-    },
-    likes: Number,
-    img:
-    {
-        data: Buffer,
-        contentType: String
-    }
-})
+  title: {
+    type: String,
+    required: true,
+  },
+  author: {
+    type: String,
+    required: true,
+  },
+  text: {
+    type: String,
+    required: true,
+  },
+  comments: [{ body: String, date: Date }],
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  likes: Number,
+  img: {
+    data: Buffer,
+    contentType: String,
+  },
+});
 
-module.exports = mongoose.model('Blogs', blogSchema);
+export const blogModel = mongoose.model("blogs", blogSchema);
+
+export default blogModel;
