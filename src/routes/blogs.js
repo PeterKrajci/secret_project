@@ -1,17 +1,18 @@
 import express from "express";
-import {param, validationResult} from "express-validator"
+import { param } from "express-validator";
 
-import services from "../services"
-
+import services from "../services";
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('We are on blogs');
-});
+router.get("/", services.blogs.getAllBlogs);
 
-router.post('/', (req, res) => {
-    console.log(req.body);
-});
+router.delete(
+  "/:id",
+  param("id")
+    .isLength({ min: 24, max: 24 })
+    .withMessage(`Not a valid blogID value`),
+  services.blogs.deleteBlogById
+);
 
 export default router;

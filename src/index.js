@@ -5,8 +5,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import pino from "pino-http";
 import bodyParser from "body-parser";
-import services from "./services";
-import { param } from "express-validator";
 
 const app = express();
 
@@ -16,14 +14,6 @@ app.use(bodyParser.json());
 app.use(pino());
 
 //Routes
-app.get("/", (req, res) => {
-  res.send("Chellou");
-});
-
-app.get("/blogs", services.blogs.getAllBlogs);
-
-app.delete("/:id", param("id").isLength(24), services.blogs.deleteBlogById);
-
 app.use("/blogs", routes.blogs);
 
 app.all("*", (_, res) => {

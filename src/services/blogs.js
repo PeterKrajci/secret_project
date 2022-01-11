@@ -1,14 +1,16 @@
-import Blog from "../models/blog";
+import { blogModel } from "../models/blog";
 import { validationResult } from "express-validator";
 
 // Function find all blogs in collection and send them as response
 const getAllBlogs = async (req, res) => {
   try {
-    const allBlogs = await Blog.find({});
+    const allBlogs = await blogModel.find({});
 
+    req.log.info("Success");
     res.status(200).send(allBlogs);
   } catch (error) {
-    res.status(500).send("My bad bro ._.");
+    req.log.info(error);
+    res.sendStatus(500);
   }
 };
 
@@ -19,21 +21,31 @@ const deleteBlogById = async (req, res) => {
     const idOfBlog = req.params.id.toString().trim();
 
     if (!validationResults.isEmpty()) {
-      res.status(400).send(`"${idOfBlog}" is not a valid blogID value`);
+      req.log.info(validationResults);
+      res.status(400).send(validationResults);
 
       return;
     }
 
-    //deleting blog from collection
-    await Blog.findByIdAndRemove(idOfBlog).exec();
+    // trying to delete blog from collection
+    const deletedBlog = await blogModel.findByIdAndRemove(idOfBlog).exec();
 
-    res
-      .status(200)
-      .send(`You've succsesfully deleted blog with id: ${req.params.id}`);
+    if (deletedBlog == null) {
+      const blogNotFoundMsg = `Blog with id "${idOfBlog}" is not found...`;
+
+      req.log.info(blogNotFoundMsg);
+      res.status(404).send(blogNotFoundMsg);
+
+      return;
+    }
+
+    const successMsg = `You've succsesfully deleted blog with id: ${req.params.id}`;
+
+    req.log.info(successMsg);
+    res.status(200).send(successMsg);
   } catch (error) {
-    res.status(500).send(`My bad bro ._.`);
-
-    console.log(error);
+    req.log.info(error);
+    res.sendStatus(500);
   }
 };
 
