@@ -9,7 +9,7 @@ const getAllBlogs = async (req, res) => {
     req.log.info("Success");
     res.status(200).send(allBlogs);
   } catch (error) {
-    req.log.info(error);
+    req.log.error(error);
     res.sendStatus(500);
   }
 };
@@ -21,7 +21,7 @@ const deleteBlogById = async (req, res) => {
     const idOfBlog = req.params.id.toString().trim();
 
     if (!validationResults.isEmpty()) {
-      req.log.info(validationResults);
+      req.log.error(validationResults);
       res.status(400).send(validationResults);
 
       return;
@@ -33,7 +33,7 @@ const deleteBlogById = async (req, res) => {
     if (deletedBlog == null) {
       const blogNotFoundMsg = `Blog with id "${idOfBlog}" is not found...`;
 
-      req.log.info(blogNotFoundMsg);
+      req.log.error(blogNotFoundMsg);
       res.status(404).send(blogNotFoundMsg);
 
       return;
@@ -44,7 +44,7 @@ const deleteBlogById = async (req, res) => {
     req.log.info(successMsg);
     res.status(200).send(successMsg);
   } catch (error) {
-    req.log.info(error);
+    req.log.error(error);
     res.sendStatus(500);
   }
 };
