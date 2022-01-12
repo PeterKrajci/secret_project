@@ -24,4 +24,12 @@ router.delete(
   services.blogs.deleteBlogById
 );
 
+router.get(
+  "/:id",
+  param("id")
+    .isLength({ min: 24, max: 24 })
+    .withMessage("Error: Invalid ID length!"),
+  services.blogs.getBlogById
+);
+
 export default router;
