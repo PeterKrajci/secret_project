@@ -1,17 +1,28 @@
 import express from "express";
-import { param, validationResult } from "express-validator";
+import { param, body } from "express-validator";
 
 import services from "../services";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("We are on blogs");
-});
+router.post(
+  "/",
+  body("title")
+    .isLength({ min: 3, max: 80 })
+    .withMessage(
+      "The length of the title must be min 3 and max 80 characters."
+    ),
+  services.blogs.addBlog)
 
-router.post("/", (req, res) => {
-  console.log(req.body);
-});
+router.get("/", services.blogs.getAllBlogs);
+
+router.delete(
+  "/:id",
+  param("id")
+    .isLength({ min: 24, max: 24 })
+    .withMessage(`Not a valid blogID value`),
+  services.blogs.deleteBlogById
+);
 
 router.get(
   "/:id",
