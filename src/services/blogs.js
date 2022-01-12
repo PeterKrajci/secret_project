@@ -1,4 +1,3 @@
-import Blog from "../models/blog";
 import { validationResult } from "express-validator";
 import { blogModel } from "../models/blog";
 
@@ -14,25 +13,28 @@ const editBlogById = async (req, res) => {
 
       return;
     }
-  
-      const updates = req.body;
-      const options = { new: true };
-      const updatedBlog = await Blog.findByIdAndUpdate(blogId, updates, options);
-  
-      if (updatedBlog) {
-        res.send(`You've succsesfully updated blog with id: ${blogId}`);
-      } else {
-        res.send(
-          `There was some error during updating the blog with id: ${blogId}`
-        );
-      }
-    } catch (error) {
-      res.sendStatus(500);
-      res.send("Error!");
-      console.log(error);
-    }
-  };
 
+    const updates = req.body;
+    const options = { new: true };
+    const updatedBlog = await blogModel.findByIdAndUpdate(
+      blogId,
+      updates,
+      options
+    );
+
+    if (updatedBlog) {
+      res.send(`You've succsesfully updated blog with id: ${blogId}`);
+    } else {
+      res.send(
+        `There was some error during updating the blog with id: ${blogId}`
+      );
+    }
+  } catch (error) {
+    res.sendStatus(500);
+    res.send("Error!");
+    console.log(error);
+  }
+};
 
 const getBlogById = async (req, res) => {
   try {
@@ -141,4 +143,10 @@ const deleteBlogById = async (req, res) => {
   }
 };
 
-export default { deleteBlogById, getAllBlogs, addBlog, getBlogById, editBlogById };
+export default {
+  deleteBlogById,
+  getAllBlogs,
+  addBlog,
+  getBlogById,
+  editBlogById,
+};
