@@ -1,0 +1,64 @@
+/*_________________________Base styling_____________________*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+h2 {
+  font-size: 2.8rem;
+  color: rgb(25, 25, 25);
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+/*_________________________NAV Section styling______________*/
+#main-header {
+  min-height: 10vh;
+  background-color: rgb(83, 177, 177);
+}
+
+/*_________________________Blogs Section styling____________*/
+
+#blogs-section {
+  min-height: 90vh;
+}
+
+#all-blogs {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.blog {
+  max-width: 60%;
+  margin: 2rem auto;
+  min-height: 12vh;
+  border: none;
+  border-radius: 3rem;
+  box-shadow: 0.3rem 0.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.blog:hover {
+  cursor: pointer;
+  box-shadow: 0.3rem 0.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.3);
+}
+
+.blog-info {
+  text-align: center;
+}
+
+/*________________________Footer Section styling____________*/
+footer {
+  min-height: 25vh;
+  background-color: rgb(83, 177, 177);
+}

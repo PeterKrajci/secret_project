@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <title>Blogs</title>
+  </head>
+  <body>
+    <header id="main-header">
+      <nav></nav>
+    </header>
+    <main>
+      <section id="blogs-section">
+        <ul id="all-blogs">
+          {#blogs}
+          <li class="blog" id="{_id}">
+            <img src="" alt="blog-image" />
+
+            <div class="blog-info">
+              <h2 class="blog-title">{title}</h2>
+              <p class="blog-text">{text}</p>
+              <time datetime="{date}">{date}</time>
+            </div>
+          </li>
+          {/blogs}
+        </ul>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>
