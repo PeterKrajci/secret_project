@@ -9,6 +9,10 @@ router.get("/", (req, res) => {
   res.send("We are on blogs");
 });
 
+router.post("/", (req, res) => {
+  console.log(req.body);
+});
+
 router.get(
   "/:id",
   param("id")
@@ -16,9 +20,5 @@ router.get(
     .withMessage("Error: Invalid ID length!"),
   services.blogs.getBlogById
 );
-
-router.post("/", (req, res) => {
-  console.log(req.body);
-});
 
 export default router;

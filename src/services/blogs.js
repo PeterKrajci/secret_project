@@ -4,24 +4,27 @@ import { blogModel } from "../models/blog";
 const getBlogById = async (req, res) => {
   try {
     const validationResults = validationResult(req);
-    if (validationResults.isEmpty()) {
-      const idOfBlog = req.params.id;
-      const blog = await blogModel.findById(idOfBlog).exec();
+    const idOfBlog = req.params.id;
 
-      if (blog == null) {
-        const blogNotFoundMsg = `Blog with id: ${idOfBlog} was not found!`;
-
-        req.log.info(blogNotFoundMsg);
-        res.status(404).send(blogNotFoundMsg);
-      } else {
-        res.status(200).send(blog);
-      }
-    } else {
-      req.log.info(validationResults);
+    if (!validationResults.isEmpty()) {
+      req.log.error(validationResults);
       res.status(422).send("ValidationError");
+
+      return;
     }
+    const blog = await blogModel.findById(idOfBlog).exec();
+    if (!blog) {
+      const blogNotFoundMsg = `Blog with id: ${idOfBlog} was not found!`;
+
+      req.log.error(blogNotFoundMsg);
+      res.status(404).send(blogNotFoundMsg);
+
+      return;
+    }
+
+    res.status(200).send(blog);
   } catch (error) {
-    req.log.info(error);
+    req.log.error(error);
     res.sendStatus(500);
   }
 };
