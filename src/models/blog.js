@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const blogSchema = mongoose.Schema({
+export const blogSchema = mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -26,5 +26,3 @@ const blogSchema = mongoose.Schema({
 });
 
 export const blogModel = mongoose.model("blogs", blogSchema);
-
-export default blogModel;
