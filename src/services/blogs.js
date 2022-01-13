@@ -30,9 +30,9 @@ const editBlogById = async (req, res) => {
       );
     }
   } catch (error) {
+    req.log.error(error);
     res.sendStatus(500);
     res.send("Error!");
-    console.log(error);
   }
 };
 

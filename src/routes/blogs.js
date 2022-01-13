@@ -7,10 +7,10 @@ const router = express.Router();
 
 router.put(
   "/:id",
-  param("id").isLength({ min: 3, max: 50 }),
   body("text").not().isEmpty(),
   body("title").not().isEmpty(),
-  services.blogs.editBlogById,)
+  services.blogs.editBlogById
+);
 
 router.post(
   "/",
@@ -19,17 +19,17 @@ router.post(
     .withMessage(
       "The length of the title must be min 3 and max 80 characters."
     ),
-  services.blogs.addBlog),
+  services.blogs.addBlog
+);
 
 router.get("/", services.blogs.getAllBlogs),
-
-router.delete(
-  "/:id",
-  param("id")
-    .isLength({ min: 24, max: 24 })
-    .withMessage(`Not a valid blogID value`),
-  services.blogs.deleteBlogById
-),
+  router.delete(
+    "/:id",
+    param("id")
+      .isLength({ min: 24, max: 24 })
+      .withMessage(`Not a valid blogID value`),
+    services.blogs.deleteBlogById
+  );
 
 router.get(
   "/:id",
@@ -37,6 +37,6 @@ router.get(
     .isLength({ min: 24, max: 24 })
     .withMessage("Error: Invalid ID length!"),
   services.blogs.getBlogById
-)
+);
 
 export default router;
