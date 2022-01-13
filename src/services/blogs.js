@@ -1,6 +1,41 @@
 import { validationResult } from "express-validator";
 import { blogModel } from "../models/blog";
 
+// find and update blog by ID
+
+const editBlogById = async (req, res) => {
+  try {
+    const blogId = req.params.id;
+    const validationResults = validationResult(req);
+
+    if (!validationResults.isEmpty()) {
+      res.status(400).send(validationResults);
+
+      return;
+    }
+
+    const updates = req.body;
+    const options = { new: true };
+    const updatedBlog = await blogModel.findByIdAndUpdate(
+      blogId,
+      updates,
+      options
+    );
+
+    if (updatedBlog) {
+      res.send(`You've succsesfully updated blog with id: ${blogId}`);
+    } else {
+      res.send(
+        `There was some error during updating the blog with id: ${blogId}`
+      );
+    }
+  } catch (error) {
+    req.log.error(error);
+    res.sendStatus(500);
+    res.send("Error!");
+  }
+};
+
 const getBlogById = async (req, res) => {
   try {
     const validationResults = validationResult(req);
@@ -108,4 +143,10 @@ const deleteBlogById = async (req, res) => {
   }
 };
 
-export default { deleteBlogById, getAllBlogs, addBlog, getBlogById };
+export default {
+  deleteBlogById,
+  getAllBlogs,
+  addBlog,
+  getBlogById,
+  editBlogById,
+};
