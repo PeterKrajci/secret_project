@@ -13,7 +13,7 @@ export const blogSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "comments" }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "comment" }],
   date: {
     type: Date,
     default: Date.now,

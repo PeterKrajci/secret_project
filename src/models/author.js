@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 export const authorSchema = mongoose.Schema({
-  username: {
+  author: {
     type: String,
     required: true,
   },
