@@ -6,14 +6,14 @@ export const blogSchema = mongoose.Schema({
     required: true,
   },
   author: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "author",
   },
   text: {
     type: String,
     required: true,
   },
-  comments: [{ body: String, date: Date }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "comments" }],
   date: {
     type: Date,
     default: Date.now,
