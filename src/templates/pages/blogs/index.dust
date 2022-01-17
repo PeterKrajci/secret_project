@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+    <title>Blogs</title>
+  </head>
+  <body>
+    <header id="main-header">
+      <nav>
+        <h1 id="logo">FunnyBlogs</h1>
+        <div class="search-container">
+          <input id="search" type="text" />
+          <img id="search-ico" src="/icons/search.png" alt="" />
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section id="blogs-section">
+        <ul id="all-blogs">
+          {#blogs}
+          <li class="blog" id="{_id}">
+            <img class="blog-img" src="/images/default-blog-img.jpeg" alt="blog-image" />
+
+            <div class="blog-info">
+              <h2 class="blog-title"><a href="{_id}">{title}</a></h2>
+              <p class="blog-text">{text}</p>
+              <time datetime="{date}">{date}</time>
+              <div class="blog-rating">
+                {rating} <img class="rating-ico" src="/icons/star.png" alt="" />
+              </div>
+            </div>
+          </li>
+          {/blogs}
+        </ul>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>

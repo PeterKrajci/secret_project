@@ -5,13 +5,29 @@ import mongoose from "mongoose";
 import cors from "cors";
 import pino from "pino-http";
 import bodyParser from "body-parser";
+import adaro from "adaro";
 
 const app = express();
+
+const options = {
+  helpers: [
+    function (dust) {
+      dust.helpers.myHelper = function (a, b, c, d) {};
+    },
+    "dustjs-helpers",
+  ],
+};
+
+app.engine("dust", adaro.dust(options));
+app.set("view engine", "dust");
+app.set("views", "./src/templates/pages");
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(pino());
+app.use(express.static("public"));
+app.use(express.static("./src/templates/pages"));
 
 //Routes
 app.use("/blogs", routes.blogs);
