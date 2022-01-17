@@ -38,7 +38,6 @@ const getAllBlogs = async (req, res) => {
     const allBlogsContext = { blogs: allBlogs };
 
     req.log.info("Success");
-    // res.status(200).send(allBlogs);
     res.status(200).render("blogs/index", allBlogsContext);
   } catch (error) {
     req.log.error(error);

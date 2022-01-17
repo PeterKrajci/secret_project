@@ -1,3 +1,9 @@
+/*_________________________Variables________________________*/
+:root {
+  --main-headers-color: rgb(48, 29, 12);
+  --main-bg-color: rgb(12, 164, 178);
+}
+
 /*_________________________Base styling_____________________*/
 * {
   margin: 0;
@@ -7,6 +13,7 @@
 
 html {
   font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
 }
 
 h2 {
@@ -18,10 +25,56 @@ p {
   font-size: 1.2rem;
 }
 
+a {
+  color: rgb(68, 42, 25);
+  text-decoration: none;
+}
+
 /*_________________________NAV Section styling______________*/
 #main-header {
   min-height: 10vh;
-  background-color: rgb(83, 177, 177);
+  background-color: var(--main-bg-color);
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  width: 55%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#logo {
+  color: var(--main-headers-color);
+  font-size: 3.5rem;
+  font-family: "Pacifico", cursive;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#search {
+  width: 12vw;
+  height: 2.5vh;
+  margin-right: 1rem;
+  border: 0.1rem solid rgb(69, 52, 37);
+  border-radius: 2rem;
+  transition: 0.2s ease-in-out;
+}
+
+#search:focus {
+  width: 25vw;
+  height: 4vh;
+  outline: none;
+}
+
+#search-ico {
+  max-height: 4.5vh;
 }
 
 /*_________________________Blogs Section styling____________*/
@@ -31,34 +84,52 @@ p {
 }
 
 #all-blogs {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
 }
 
 .blog {
-  max-width: 60%;
+  max-width: 55%;
   margin: 2rem auto;
   min-height: 12vh;
-  border: none;
-  border-radius: 3rem;
-  box-shadow: 0.3rem 0.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.15);
-  text-decoration: none;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0.3rem 0.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  overflow: hidden;
+  position: relative;
 }
 
 .blog:hover {
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+  overflow: visible;
   box-shadow: 0.3rem 0.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.3);
+}
+
+.blog:hover .blog-img {
+  transform: scale(1.1);
+}
+
+.blog-img {
+  width: 30%;
+  object-fit: cover;
+  transition: 0.3s ease-in-out;
 }
 
 .blog-info {
   text-align: center;
+  width: 80%;
+}
+
+.rating-ico {
+  max-width: 2rem;
 }
 
 /*________________________Footer Section styling____________*/
 footer {
   min-height: 25vh;
-  background-color: rgb(83, 177, 177);
+  background-color: var(--main-bg-color);
 }
