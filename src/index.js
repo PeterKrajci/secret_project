@@ -22,8 +22,10 @@ app.all("*", (_, res) => {
 
 //Connect to DB
 console.log(process.env.DB_CONNECTION);
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
-  console.log("Connected to DB")
+mongoose.connect(
+  process.env.DB_CONNECTION,
+  { useNewUrlParser: true },
+  (error) => console.log("Connected to DB", error)
 );
 
 // Listen to server

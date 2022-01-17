@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
-import { blogModel } from "../models/blog";
+import { blogModel, blogSchema } from "../models/blog";
+import { commentModel } from "../models/comment";
 
 // find and update blog by ID
 
@@ -13,12 +14,21 @@ const editBlogById = async (req, res) => {
 
       return;
     }
-
+    const selectedBlog = await blogModel.findById({ _id: blogId });
     const updates = req.body;
+    if (updates.comments) {
+      updates.comments.forEach(async (comment) => {
+        const newComment = new commentModel(comment);
+        await newComment.save();
+        await selectedBlog.comments.push(newComment);
+        await selectedBlog.save();
+      });
+    }
+    const { comments, ...rest } = updates;
     const options = { new: true };
     const updatedBlog = await blogModel.findByIdAndUpdate(
       blogId,
-      updates,
+      rest,
       options
     );
 
@@ -77,7 +87,6 @@ const addBlog = async (req, res) => {
         author: req.body.author,
         text: req.body.text,
       });
-
       await blog.save();
 
       res.status(200);
@@ -97,7 +106,7 @@ const addBlog = async (req, res) => {
 // Function find all blogs in collection and send them as response
 const getAllBlogs = async (req, res) => {
   try {
-    const allBlogs = await blogModel.find({});
+    const allBlogs = await blogModel.find({}).populate("comments").exec();
 
     req.log.info("Success");
     res.status(200).send(allBlogs);
