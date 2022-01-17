@@ -1,3 +1,4 @@
+import { request } from "express";
 import { validationResult } from "express-validator";
 import { blogModel } from "../models/blog";
 
@@ -76,8 +77,8 @@ const addBlog = async (req, res) => {
         title: req.body.title,
         author: req.body.author,
         text: req.body.text,
+        img: { name: req.file.filename, originalName: req.file.originalname },
       });
-
       await blog.save();
 
       res.status(200);
@@ -85,7 +86,6 @@ const addBlog = async (req, res) => {
     } else {
       req.log.info(`validation error value: ${validationResults}`);
       res.status(400);
-      res.send("validationError");
       res.send(validationResults);
     }
   } catch (error) {

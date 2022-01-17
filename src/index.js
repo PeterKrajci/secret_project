@@ -5,6 +5,27 @@ import mongoose from "mongoose";
 import cors from "cors";
 import pino from "pino-http";
 import bodyParser from "body-parser";
+import multer from "multer";
+
+//Configuration for Multer
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "/Users/krajci/Projects/secret_project/src/public");
+  },
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `/${file.fieldname}-${Date.now()}.${ext}`);
+  },
+});
+
+// Multer Filter
+// const multerFilter = (req, file, cb) => {
+//   if (file.mimetype.split("/")[1] === "jpg") {
+//     cb(null, true);
+//   } else {
+//     cb(new Error("Not a JPG file!"), false);
+//   }
+// };
 
 const app = express();
 
@@ -12,6 +33,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(pino());
+app.use(
+  multer({
+    storage: multerStorage,
+  }).single("myImage")
+);
 
 //Routes
 app.use("/blogs", routes.blogs);

@@ -20,8 +20,14 @@ export const blogSchema = mongoose.Schema({
   },
   likes: Number,
   img: {
-    data: Buffer,
-    contentType: String,
+    originalName: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: [true, "Uploaded file must have a name"],
+    },
   },
 });
 
