@@ -1,7 +1,7 @@
 import express from "express";
 import { param, body } from "express-validator";
-
 import services from "../services";
+import multer from "multer";
 
 const router = express.Router();
 
