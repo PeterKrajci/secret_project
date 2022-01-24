@@ -28,7 +28,7 @@
             <div class="blog-info">
               <h2 class="blog-title"><a href="{_id}">{title}</a></h2>
               <p class="blog-text">{text}</p>
-              <time datetime="{date}">{date}</time>
+              <div class="myDate">{date}</div>
               <div class="blog-rating">
                 {rating} <img class="rating-ico" src="/icons/star.png" alt="" />
               </div>

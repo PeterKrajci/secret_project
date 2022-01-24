@@ -7,7 +7,6 @@ export const blogSchema = mongoose.Schema({
   },
   author: {
     type: String,
-    required: true,
   },
   text: {
     type: String,

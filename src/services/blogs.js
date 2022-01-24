@@ -2,7 +2,6 @@ import { validationResult } from "express-validator";
 import { blogModel } from "../models/blog";
 
 //inserting new blog to DB
-
 const addBlog = async (req, res) => {
   try {
     const validationResults = validationResult(req);
@@ -16,18 +15,14 @@ const addBlog = async (req, res) => {
 
       await blog.save();
 
-      res.status(200);
-      res.json(blog);
+      res.status(200).json(blog);
     } else {
       req.log.info(`validation error value: ${validationResults}`);
-      res.status(400);
-      res.send("validationError");
-      res.send(validationResults);
+      res.status(400).send(validationResults);
     }
   } catch (error) {
     req.log.error(error);
-    res.sendStatus(500);
-    res.send("Error!");
+    res.status(500).send("Error!");
   }
 };
 
@@ -35,7 +30,22 @@ const addBlog = async (req, res) => {
 const getAllBlogs = async (req, res) => {
   try {
     const allBlogs = await blogModel.find({});
-    const allBlogsContext = { blogs: allBlogs };
+
+    // Date refactoring (should be moved to helpers)
+    const newBlogs = allBlogs.map((blog) => {
+      const date = blog["date"];
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      const newDate = `${day}/${month}/${year}`;
+
+      // blog["date"] = 4;
+      console.log(blog);
+
+      return blog;
+    });
+
+    const allBlogsContext = { blogs: newBlogs };
 
     req.log.info("Success");
     res.status(200).render("blogs/index", allBlogsContext);
