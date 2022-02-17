@@ -22,14 +22,15 @@ router.post(
   services.blogs.addBlog
 );
 
-router.get("/", services.blogs.getAllBlogs),
-  router.delete(
-    "/:id",
-    param("id")
-      .isLength({ min: 24, max: 24 })
-      .withMessage(`Not a valid blogID value`),
-    services.blogs.deleteBlogById
-  );
+router.get("/", services.blogs.getAllBlogs);
+
+router.delete(
+  "/:id",
+  param("id")
+    .isLength({ min: 24, max: 24 })
+    .withMessage(`Not a valid blogID value`),
+  services.blogs.deleteBlogById
+);
 
 router.get(
   "/:id",
